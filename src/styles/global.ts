@@ -74,12 +74,19 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     .react-modal-content{
-        width: 576px;
-        height: 588px;
-        padding: 64px 48px;
-        background-color: #FFFFFF;
+        width: 100%;
+        max-width: 576px;
+        background-color:var(--background);
+        padding: 3rem;
+        position: relative;
         border-radius: 5px;
     }
 
+    .react-modal-close {
+        position: absolute;
+        right: 1.5rem;
+        top: 1.5rem;   
 
+        border: 0;     
+    }
 `;
