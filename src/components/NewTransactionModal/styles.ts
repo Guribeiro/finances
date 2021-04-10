@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Container = styled.form`
     display: flex;
     flex-direction: column;
-
     h1{
         font-size: 1.5rem;
         color: var(--text-title);
@@ -33,5 +32,11 @@ export const Container = styled.form`
         background-color: var(--gren);
         border: 0;
         border-radius: 5px;
+        transition: filter 0.2s;
+
+        &:hover{
+            filter: brightness(0.9);
+        }
     }
+
 `;
