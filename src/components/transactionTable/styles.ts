@@ -4,7 +4,6 @@ export const Container = styled.div`
         margin-top: 4rem;
 
     table {
-        border: 1px solid red;
         width: 100%;
         border-spacing: 0 0.5rem;
 
