@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container } from './styles';
 
-import Summary from '../../components/summary';
-import TransactionTable from '../../components/transactionTable';
+import Summary from '../../components/Summary';
+import TransactionTable from '../../components/TransactionTable';
 
 const Dashboard: React.FC = () => {
     return (
