@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { GlobalStyle } from './styles/global';
 
-import Modal from 'react-modal';
+import NewTransactionModal from './components/NewTransactionModal';
 
-import Header from './components/header';
+import Header from './components/Header';
 
 import Dashboard from './pages/dashboard';
 
@@ -20,14 +20,13 @@ const App: React.FC = () => {
   }, [])
   return (
     <>
-      <Header onOpenNewTransactionModal={handleOpenNewTransactionModal}/>
+      <Header onOpenNewTransactionModal={handleOpenNewTransactionModal} />
       <Dashboard />
-      <Modal
+      <NewTransactionModal
         isOpen={isNewTransactionModalOpen}
         onRequestClose={handleCloseNewTransactionModal}
-      >
-        <h1>Modal is open</h1>
-      </Modal>
+      />
+
       <GlobalStyle />
     </>
   );
