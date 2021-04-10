@@ -14,6 +14,9 @@ export const GlobalStyle = createGlobalStyle`
         --text-title: #363F5F;
         --text-body: #969CB3;
 
+        --input-background: #E7E9EE;
+        --input-stroke: #D7D7D7;
+
         --text-button: #FFFFFF;
 
         --shape: #FFFFFF;
@@ -55,6 +58,27 @@ export const GlobalStyle = createGlobalStyle`
     [disabled]{
         opacity: 0.6;
         cursor: not-allowed;
+    }
+
+    .react-modal-overlay {
+        background-color: #00000050;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .react-modal-content{
+        width: 576px;
+        height: 588px;
+        padding: 64px 48px;
+        background-color: #FFFFFF;
+        border-radius: 5px;
     }
 
 
