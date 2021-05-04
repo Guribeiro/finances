@@ -7,6 +7,8 @@ import Header from './components/Header';
 
 import Dashboard from './pages/dashboard';
 
+import {TransactionProvider} from './hooks/useTransactions';
+
 const App: React.FC = () => {
 
   const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
@@ -19,7 +21,7 @@ const App: React.FC = () => {
     setIsNewTransactionModalOpen(false);
   }, [])
   return (
-    <>
+    <TransactionProvider>
       <Header onOpenNewTransactionModal={handleOpenNewTransactionModal} />
       <Dashboard />
       <NewTransactionModal
@@ -28,7 +30,7 @@ const App: React.FC = () => {
       />
 
       <GlobalStyle />
-    </>
+    </TransactionProvider>
   );
 }
 
