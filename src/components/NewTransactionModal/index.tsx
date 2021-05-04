@@ -1,4 +1,5 @@
-import React, { useState, useCallback, FormEvent } from 'react';
+import React, { useState, useCallback, FormEvent, useContext } from 'react';
+import { useTransactions } from '../../hooks/useTransactions';
 
 import { Container, TransactionTypeContainer, RadioBox } from './styles';
 import closeIcon from '../../assets/close.svg';
@@ -15,27 +16,32 @@ interface NewTransactionModalProps {
 type TransactionType = 'deposit' | 'withdraw'
 
 const NewTransactionModal: React.FC<NewTransactionModalProps> = ({ isOpen, onRequestClose }) => {
-
     const [title, setTitle] = useState('');
-    const [price, setPrice] = useState(0);
+    const [amount, setAmount] = useState(0);
     const [category, setCategory] = useState('');
-    const [transactionType, setTransactiontype] = useState<TransactionType>();
+    const [type, setType] = useState<TransactionType>('deposit');
 
-    const handleSubmit = useCallback((event:FormEvent) =>{
+    const { createTransaction } = useTransactions()
+
+    const handleSubmit = useCallback(async (event: FormEvent) => {
         event.preventDefault()
 
-        console.log({
+        await createTransaction({
             title,
-            price,
+            amount,
             category,
-            transactionType
+            type,
         })
 
-    }, [ title,
-        price,
-        category,
-        transactionType])
- 
+        setTitle('');
+        setAmount(0);
+        setCategory('');
+        setType('deposit')
+        
+        onRequestClose();
+
+    }, [title, amount, category, type])
+
     return (
         <Modal
             overlayClassName='react-modal-overlay'
@@ -53,23 +59,23 @@ const NewTransactionModal: React.FC<NewTransactionModalProps> = ({ isOpen, onReq
             </button>
             <Container onSubmit={handleSubmit}>
                 <h1>Cadastrar transação</h1>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     placeholder='Título'
                     value={title}
                     onChange={event => setTitle(event.target.value)}
-                    />
-                <input 
-                    type="text" 
+                />
+                <input
+                    type="text"
                     placeholder='Preço'
-                    value={price}
-                    onChange={event => setPrice(Number(event.target.value))}
-                    />
+                    value={amount}
+                    onChange={event => setAmount(Number(event.target.value))}
+                />
                 <TransactionTypeContainer>
                     <RadioBox
                         type='button'
-                        onClick={() => setTransactiontype('deposit')}
-                        isActive={transactionType === 'deposit'}
+                        onClick={() => setType('deposit')}
+                        isActive={type === 'deposit'}
                         activeColor='green'
                     >
                         <img src={incomeIcon} alt="Entrada" />
@@ -77,20 +83,20 @@ const NewTransactionModal: React.FC<NewTransactionModalProps> = ({ isOpen, onReq
                     </RadioBox>
                     <RadioBox
                         type='button'
-                        onClick={() => setTransactiontype('withdraw')}
-                        isActive={transactionType === 'withdraw'}
+                        onClick={() => setType('withdraw')}
+                        isActive={type === 'withdraw'}
                         activeColor='red'
                     >
                         <img src={outcomeIcon} alt="Saída" />
                         <span>Saída</span>
                     </RadioBox>
                 </TransactionTypeContainer>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     placeholder='Categoria'
                     value={category}
                     onChange={event => setCategory(event.target.value)}
-                    />
+                />
                 <button type="submit">Cadastrar</button>
             </Container>
         </Modal>
